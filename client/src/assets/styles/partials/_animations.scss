@@ -1,0 +1,65 @@
+// slide wrapper
+.slider {
+  // height is here necessary
+  // however we will be setting it via javascript because it depends on dynamic content
+
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-left.ng-enter,
+.slide-left.ng-leave,
+.slide-right.ng-enter,
+.slide-right.ng-leave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  // -ms-transition: 1.3s ease-in-out;
+  // -webkit-transition: 1.3s ease-in-out;
+  // transition: 1.3s ease-in-out;
+  @include transition(1.3s ease-in-out);
+}
+
+// start of item leaving
+.slide-left.ng-leave,
+.slide-right.ng-leave,
+// item in process of entering
+.slide-left.ng-enter.ng-enter-active,
+.slide-right.ng-enter.ng-enter-active  {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+
+  @include opacity(1);
+}
+
+// start of item entering
+.slide-left.ng-enter {
+  z-index: 10;
+  -webkit-transform: translateX(105%);
+  transform: translateX(105%);
+}
+
+// start of item entering
+.slide-right.ng-enter {
+  z-index: 10;
+  -webkit-transform: translateX(-105%);
+  transform: translateX(-105%);
+}
+
+// item leaving in process of leaving
+.slide-left.ng-leave.ng-leave-active {
+  -webkit-transform: translateX(-70%);
+  transform: translateX(-70%);
+
+  @include opacity(0);
+}
+
+// item leaving in process of leaving
+.slide-right.ng-leave.ng-leave-active {
+  -webkit-transform: translateX(70%);
+  transform: translateX(70%);
+
+  @include opacity(0);
+}

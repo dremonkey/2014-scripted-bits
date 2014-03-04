@@ -1,0 +1,159 @@
+// Import Compass Mixins
+// --------------------------------------------
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+@import "compass/css3/background-clip";
+@import "compass/css3/background-size";
+@import "compass/css3/box-sizing";
+@import "compass/css3/text-shadow";
+@import "compass/css3/opacity";
+@import "compass/css3/images";
+
+// Import Variables and Custom Mixins
+// --------------------------------------------
+@import "partials/variables";
+@import "partials/mixins";
+
+// App Styling that can be overridden
+// --------------------------------------------
+@import "partials/animations";
+@import "partials/sticky-footer";
+
+body {
+  background: $bgBody;
+  font-family: $sans;
+  color: $defaultTextColor;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+a {
+  color: $royalBlue;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, label {
+  @include opacity(0);
+}
+
+.wf-inactive,
+.wf-active {
+  h1, h2, h3, h4, h5, h6, p, span, a {
+    @include opacity(1);
+    @include transition(opacity 1s ease-in-out);
+  }
+}
+
+.branding {
+  font-family: $logoFont;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-bottom: 1px dashed $salmon;
+  }
+}
+
+.invisible {
+  visibility: visible;
+  @include opacity(0);
+}
+
+// Image Replace
+// http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/
+.hide-text {
+  display: block;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// To use this the element must have a width specified
+// http://css-tricks.com/snippets/css/truncate-string-with-ellipsis/
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Buttons
+.btn {
+  @include transition(all 0.2s ease-in-out);
+  // @include border-radius(999em);
+  @include border-radius(3px);
+}
+
+.btn-default {
+  color: $defaultTextColor;
+  border-color: $defaultBorderColor;
+}
+
+.btn-outline {
+  color: $salmon;
+  background-color: transparent;
+  border-color: $salmon;
+
+  &:hover {
+    color: white;
+    background: $salmon;
+  }
+}
+
+.btn-outline-alt {
+  color: $purple;
+  background-color: transparent;
+  border-color: $purple;
+
+  &:hover {
+    color: white;
+    background: $purple;
+  }
+}
+
+.btn-solid {
+  color: white;
+  background-color: $salmon;
+  border-color: $salmon;
+
+  &:hover {
+    color: $salmon;
+    background: transparent;
+  }
+}
+
+.btn-solid-alt {
+  color: white;
+  background-color: $purple;
+  border-color: $purple;
+
+  &:hover {
+    color: $purple;
+    background-color: transparent;
+  }
+}
+
+.container {
+  max-width: $readingWidth;
+}
+
+// Make reading easier
+.reading-width {
+  max-width: $readingWidth;
+}
+
+// Import App Styling
+// --------------------------------------------
+@import "partials/footer";
+@import "partials/header";
+@import "partials/home";
+@import "partials/page";
+@import "partials/post";
+@import "partials/posts";
+@import "partials/project";
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {}

@@ -1,0 +1,65 @@
+<section skrollr id="intro" class="intro">
+  <div class="container" data-anchor-target="#intro" data-100="opacity:1; top:50%;" data-600="opacity:0; top:80%;">
+    <div class="content">
+      <h1 class="branding">scripted bit</h1>
+      <h4 class="sub-heading"><strong>I'm Andre</strong>, a full stack developer and designer. This is my site.</h4>
+    </div>
+  </div>
+  <div class="avatar">
+    <img gravatar-src="'a.deutmeyer@gmail.com'" gravatar-size="140" >
+  </div>
+</section>
+
+<section class="posts">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="content col-sm-12">
+        <h1 class="section-title">Recent Posts</h1>
+        <div post-list="displayLimit=3, showCategory=true"></div>
+        <footer class="posts-footer">
+          <a ui-sref="posts.all.list" class="btn btn-solid-alt btn-lg">View more posts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="content col-sm-12">
+        <h1 class="section-title">Things I've done</h1>
+        <ul skrollr-masonry masonry column-width="290" class="projects">
+          <li skrollr-masonry-brick masonry-brick ng-repeat="project in projects" class="project" style=" width:{{project.width}}px; height:{{project.height}}px;">
+            <a ui-sref="project({slug: project.slug})">
+              <img ng-src="{{project.featured_image}}" />
+              <div class="project-info">
+                <h3 class="project-title">{{project.title}}</h3>
+                <ul class="project-tags">
+                  <li ng-repeat="tag in project.tags" class="project-tag">
+                    <span>{{tag.name}}</span>
+                  </li>
+                </ul>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="content col-sm-12">
+        <h1 class="section-title">Get in touch</h1>
+        <ul class="contact-links">
+          <li ng-repeat="link in contactLinks">
+            <a href="{{link.href}}" title="{{link.title}}"><i class="{{link.icon}}"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

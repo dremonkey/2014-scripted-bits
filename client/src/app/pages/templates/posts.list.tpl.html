@@ -1,0 +1,15 @@
+<!-- List of Posts -->
+<ul class="post-list">
+  <li class="post" ng-repeat="post in pagedPosts | limitTo:displayLimit">
+    <ul class="post-meta">
+      <li class="posted"><span class="date">{{post.date | date:'MMMM d'}}</span></li>
+      <li ng-show="showCategory" ng-repeat="cat in post.categories | limitTo:1" class="post-category">
+        <span>in <a ui-sref="posts.filtered.list({filterBy:'topic', slug:cat.slug})">{{cat.name}}</a></span>
+      </li>
+    </ul>
+    <div class="post-content">
+      <h2 class="post-title"><a ui-sref="post({slug: post.slug})">{{post.title}}</a></h2>
+      <p class="post-excerpt" ng-bind-html="post.excerpt | readmore:post.slug:'&rarr;'"></p>
+    </div>
+  </li>
+</ul>

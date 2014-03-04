@@ -1,0 +1,24 @@
+<section class="project content-section">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-7">
+          <ul class="images">
+            <li class="image" ng-repeat="img in currentProject.attachments | limitTo:1">
+              <img ng-src="{{img.guid}}" width="{{img.width}}" height="{{img.height}}"/>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-5">
+          <div class="content">
+            <h1 class="title project-title">{{currentProject.title}}</h1>
+            <p class="description project-description" ng-bind-html="currentProject.content"></p>
+          </div>
+          <div>
+            <a ui-sref="project({slug:nextProject.slug})" class="btn btn-lg btn-solid">See another project</a>
+          </div>
+        </div>
+      </div>
+      <div class="content col-md-12" ng-bind-html="currentPost.content"></div>
+    </div>
+  </div>
+</section>

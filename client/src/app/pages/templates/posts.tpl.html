@@ -1,0 +1,38 @@
+<section skrollr id="cover" class="cover-image" style="background-image:url('http://lorempixel.com/g/1600/900');">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="content col-sm-12">
+        <header class="post-header" data-anchor-target="#cover" data-100="opacity:1; bottom: 15%;" data-500="opacity:0; bottom: 35%;">
+          <h1 class="page-title title">{{pageTitle}}</h1>
+          <p class="page-description description">{{pageDescription}}</p>
+        </header>  
+      </div>
+    </div>
+  </div>
+  <div class="background-overlay"></div>
+</section>
+
+<section class="posts">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="content col-sm-12">
+        <div ui-view-wrapper class="slider">
+          <!-- Posts -->
+          <div ui-view class="animate-ui-view" anim-speed="1300"></div>
+        </div>
+
+        <!-- Pagination -->
+        <div ng-controller="PostListPaginationCtrl" ng-hide="!pagedPosts" pagination
+          class="pagination pagination-sm"
+          boundary-links="true"
+          items-per-page="displayLimit"
+          max-size="5"
+          page="currentPage"
+          on-select-page="goToPage(page)"
+          rotate="false"
+          total-items="totalItems">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

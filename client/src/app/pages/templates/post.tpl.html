@@ -1,0 +1,48 @@
+<section skrollr id="cover" class="cover-image" style="background-image:url('http://lorempixel.com/g/1600/900');">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="content col-sm-12">
+        <header class="post-header" data-anchor-target="#cover" data-100="opacity:1; bottom: 15%;" data-500="opacity:0; bottom: 35%;">
+          <h1 class="post-title title">{{currentPost.title}}</h1>
+          <div class="posted">
+            <span>Published on <em class="date">{{currentPost.date | date:'medium'}}</em></span>
+          </div>
+        </header>  
+      </div>
+    </div>
+  </div>
+  <div class="background-overlay"></div>
+</section>
+
+<section id="current-post" class="post">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="post-meta">
+          <li ng-repeat="cat in currentPost.categories" class="post-category">
+            <a ui-sref="posts.filtered.list({filterBy:'topic', slug:cat.slug})">{{cat.name}}</a>
+          </li>
+          <li ng-repeat="tag in currentPost.tags" class="post-tag">
+            <a ui-sref="posts.filtered.list({filterBy:'tag', slug:tag.slug})">{{tag.name}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content col-sm-12 col-reading" ng-bind-html="currentPost.content"></div>
+    </div>
+  </div>
+</section>
+
+<section skrollr id="next-post" class="next-post" style="background-image:url('http://lorempixel.com/g/1600/460');">
+  <div class="container reading-width">
+    <div class="row">
+      <div class="content col-sm-12">
+        <h4 class="description" data-anchor-target="#next-post" data-600-top="opacity:0;" data-550-top="opacity:1;">next post</h4>
+        <div class="post-content" data-anchor-target="#next-post" data-800-top="opacity:0; top:-120px;" data-600-top="opacity:1; top: 0;">
+          <h1 class="post-title title"><a ui-sref="post({slug:nextPost.slug})">{{nextPost.title}}</a></h1>
+          <p class="post-excerpt" ng-bind-html="nextPost.excerpt | readmore:nextPost.slug:'&rarr;'"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="background-overlay"></div>
+</section>

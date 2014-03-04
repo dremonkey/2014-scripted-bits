@@ -1,0 +1,6 @@
+@mixin animation($anim) {
+  -webkit-animation: $anim;
+  -moz-animation: $anim;
+  -ms-animation: $anim;
+  animation: $anim;
+}

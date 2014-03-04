@@ -1,0 +1,116 @@
+$postMetaWidth: 120px;
+
+// Shared posts list styles
+.posts {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .post-title {
+      position: relative;
+      font-size: 26px;
+      padding: 0 0 10px 0;
+      margin: 0 0 10px 0;
+      border-bottom: 1px solid $lightGray;
+      
+      a {
+        color: $defaultHeadingTextColor;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .post {
+      position: relative;
+      margin: 0;
+      padding: 25px 0 15px;
+      padding-left: $postMetaWidth + 30px;
+
+      .more {
+        text-transform: lowercase;
+        font-weight: 400;
+      }
+
+      .post-meta {
+        position: absolute;
+        left: 0;
+        width: $postMetaWidth;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: right;
+
+        .date, .post-category {
+          line-height: 1.5em;
+          color: darken($lightGray, 20%);
+        }
+
+        .date {
+          text-transform: capitalize;
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 1px;
+        }
+
+        .post-category {
+          font-size: 12px;
+          text-decoration: none;
+          text-transform: lowercase;
+
+          a {
+            $color: $royalBlue;
+            color: $color;
+            font-weight: bold;
+            border: none;
+            border-bottom: 1px dashed $color;
+
+            &:hover {
+              text-decoration: none;
+              border-bottom-style: solid;
+            }
+          }
+        }
+      }
+
+      .post-content {
+        // margin-left: $metaWidth;
+      }
+    }
+  }
+}
+
+#page-posts {
+  #site-header {
+    position: relative;
+    margin-bottom: -50px;
+    background: rgba(white, 0.2);
+    z-index: 5;
+
+    .branding, a {
+      color: white;
+    }
+
+    .navbar-nav a:hover {
+      background: white;
+      color: $defaultTextColor;
+    }
+  }
+
+  .slider {
+    overflow: visible;
+  }
+
+  .posts .post-list .post {
+    padding-left: 0;
+    padding-right: 30px;
+
+    .post-meta {
+      left: -$postMetaWidth - 30px;
+    }
+  }
+}

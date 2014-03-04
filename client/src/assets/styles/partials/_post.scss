@@ -1,0 +1,156 @@
+#page-post {
+  $nextPostHeight: 460px;
+
+  #site-header {
+    position: relative;
+    margin-bottom: -50px;
+    background: rgba(white, 0.2);
+    z-index: 5;
+
+    .branding, a {
+      color: white;
+    }
+
+    .navbar-nav a:hover {
+      background: white;
+      color: $defaultTextColor;
+    }
+  }
+
+  .page-content {
+    // padding-bottom: $nextPostHeight; // same height as .next-post
+  }
+
+  .post-header .posted {
+    font-size: .95em;
+    color: white;
+    
+    .date {
+      font-style: normal;
+      font-weight: bold;
+    }
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .post-meta {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 0 0 30px;
+    border-bottom: 1px solid $defaultBorderColor;
+    @include clearfix();
+    
+    .post-category,
+    .post-tag {
+      float: left;
+    }
+
+    .post-category a,
+    .post-tag a {
+      font-size: 14px;
+      margin-right: 10px;
+      padding: 5px 12px;
+      border: 1px solid $defaultBorderColor;
+      text-decoration: none;
+      @include border-radius(999em);
+    }
+
+    .post-category a {
+      $color: $salmon;
+      border-color: $color;
+      color: $color;
+      font-weight: bold;
+
+      &:hover {
+        color: white;
+        background-color: $color;
+      }
+    }
+    
+    .post-tag a {
+      $color: darken($lightGray, 15%);
+      border-color: $color;
+      color: $color;
+
+      &:hover {
+        color: white;
+        background-color: $color;
+      }
+    }
+  }
+
+  .post {
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    line-height: 1.5;
+    background: white;
+    min-height: $nextPostHeight;
+  }
+
+  .next-post {
+    position: relative;
+    z-index: 0;
+    height: $nextPostHeight;
+    margin-bottom: -$footerHeight; // so footer overlaps the bg image;
+    background-color: $bgFooter;
+
+    .container {
+      position: relative;
+      z-index: 1;
+      margin-top: 30px;
+
+      .post-content {
+        position: relative;
+      }
+
+      .post-title a {
+        color: white;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .post-excerpt {
+        margin-top: 20px;
+        color: rgba(255,255,255,0.7);
+      }
+
+      .description {
+        border-top: 1px solid white;
+        color: rgba(255,255,255,0.7);
+        padding: 20px 0;
+        margin: 0 0 60px 0;
+        font-size: 16px;
+      }
+    }
+
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height:  100%;
+      background: rgba(0,0,0,0.5);
+    }
+  }
+
+  #site-footer {
+    position: relative;
+    background: none;
+
+    .container {
+      width: $readingWidth;
+      padding: 0 15px;
+
+      p {
+        border-top: 1px solid white;
+        padding: 20px 0 19px;
+      }
+    }
+  }
+}

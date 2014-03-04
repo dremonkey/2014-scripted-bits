@@ -1,0 +1,27 @@
+#site-footer {
+  background: $bgFooter;
+  color: $lightGray;
+  line-height: 20px;
+  font-size: 14px;
+
+  p {
+    margin: 0;
+    text-align: center;
+  }
+
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .fa-heart {
+    margin-right: 3px;
+  }
+
+  // .branding {
+  //   float: right;
+  //   font-family: $logoFont;
+  //   font-style: italic;
+  //   font-weight: bold;
+  // }
+}

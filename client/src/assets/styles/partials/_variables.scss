@@ -1,0 +1,35 @@
+// Color Palette
+$white: #ffffff;
+$darkGray: #2d2d2d;
+$lightGray: #eceef3;
+// $royalBlue: #348eda;
+$royalBlue: #3498db;
+$salmon: #e06d5e;
+$whitePeach: #fbdcd8;
+$green: #1fa67a;
+$purple: #563d7c;
+
+// Background Colors
+$bgBody: #ffffff;
+$bgHeader: $bgBody;
+$bgFooter: $darkGray;
+
+// Text Colors
+$defaultHeadingTextColor: #333;
+$defaultTextColor: #555;
+
+// Border Colors
+$defaultBorderColor: darken($lightGray, 10%);
+
+// Fonts
+$serif: serif;
+// $sans: "Source Sans Pro", sans-serif;
+$sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$logoFont: "Lobster Two", cursive;
+
+// Footer Height (for Sticky Footer)
+$footerHeight: 60px;
+
+// Max width for content meant to be read
+$readingWidth: 750px;
+$maxWidth: 970px;

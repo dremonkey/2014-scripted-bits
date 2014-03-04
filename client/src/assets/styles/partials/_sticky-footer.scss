@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100% !important;
+}
+
+#realm {
+  min-height: 100% !important;
+  /* equal to footer height */
+  margin-bottom: -$footerHeight; 
+}
+
+#realm:after {
+  content: "";
+  display: block;
+}
+
+#site-footer, #realm:after {
+  /* the push must be the same height as footer */
+  height: $footerHeight; 
+}
