@@ -51,6 +51,10 @@ angular.module('particle.pages')
         }
       })
 
+      .state('home.portfolio', {
+        url: '^/#portfolio'
+      })
+
       // Blog
       .state('posts', {
         url: '/posts',

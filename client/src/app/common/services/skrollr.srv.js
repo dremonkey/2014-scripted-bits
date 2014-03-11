@@ -3,7 +3,8 @@
 angular.module('particle.common.skrollr')
 
   // @TODO Make this a provider so skrollr options can be injected/configured
-  .factory('skrollrd', function () {
+  // @TODO Make skrollr menu a provider option
+  .factory('skrollrd', function ($location) {
     var _instance, _destroyTimer, options;
 
     options = {
@@ -12,6 +13,28 @@ angular.module('particle.common.skrollr')
 
     // Initialize skrollr
     _instance = skrollr.init(options);
+
+    // Initialize skrollr-menu
+    skrollr.menu.init(_instance, {
+      duration: function (currentTop, targetTop) {
+        console.log(currentTop, targetTop);
+      },
+
+      // handleLink: function () {
+      //   var $el, id;
+
+      //   id = $location.hash();
+      //   $el = angular.element(document.getElementById(id));
+
+        // @TODO need to figure out a good way to fire this after content has loaded
+        // console.log($el[0].offsetTop);
+        
+        // return $el[0].offsetTop;
+        // return 
+      // }
+    });
+
+    console.log(skrollr.menu);
 
     // Helper function to get all nodes of an element
     function getNodes (el, nodes) {

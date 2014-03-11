@@ -2,7 +2,7 @@
 
 angular.module('particle.pages.controllers')
   .controller('HomeCtrl', function (_, $scope, $projects) {
-    var contactLinks;
+    var contactLinks, getProjects;
 
     contactLinks = [
       {
@@ -23,7 +23,7 @@ angular.module('particle.pages.controllers')
     ];
 
     // Get Projects
-    this.getProjects = function (num) {
+    getProjects = function (num) {
       var params;
 
       params = {
@@ -38,9 +38,8 @@ angular.module('particle.pages.controllers')
 
     // $scope assignment
     $scope.contactLinks = contactLinks;
-    // $scope.projects = $projects.get(9);
     $scope.projects = null;
 
     // Initialize
-    this.getProjects();
+    getProjects();
   });

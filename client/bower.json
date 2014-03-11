@@ -18,7 +18,8 @@
     "masonry": "~3.1.4",
     "momentjs": "~2.5.1",
     "restangular": "~1.2.2",
-    "skrollr": "git@github.com:dremonkey/skrollr.git#master"
+    "skrollr": "git@github.com:dremonkey/skrollr.git#master",
+    "skrollr-menu": "git@github.com:dremonkey/skrollr-menu.git#master"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
