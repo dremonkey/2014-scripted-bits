@@ -2,7 +2,7 @@
 .DS_Store
 
 # Heroku Dir
-_heroku/*
+_heroku
 
 # Azure Dir
-_azure/*
+_azure
