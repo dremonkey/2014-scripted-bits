@@ -11,49 +11,84 @@
 tld=$(cd ..; pwd)
 
 echo "Which environment would you like to deploy?"
-select env in "Heroku" "Other"; do
-    case $env in
-        Heroku ) 
-          echo "Preparing server files for deployment"
-          cd "$tld/server"
-          
-          # watch output to see if any of the grunt tasks failed
-          exec grunt heroku | while read line; do
-            echo $line
-            if [[ $line =~ "Aborted due to warnings" ]]; then
-              exit 1
-            fi
-          done
+select env in "Heroku" "Azure"; do
+  case $env in
+    Heroku ) 
+      echo "Preparing server files for deployment"
+      cd "$tld/server"
+      
+      # watch output to see if any of the grunt tasks failed
+      exec grunt heroku | while read line; do
+        echo $line
+        if [[ $line =~ "Aborted due to warnings" ]]; then
+          exit 1
+        fi
+      done
 
-          # if grunt failed then stop execution
-          if [[ $? -ne 0 ]]; then
-            exit 1
-          fi
+      # if grunt failed then stop execution
+      if [[ $? -ne 0 ]]; then
+        exit 1
+      fi
 
-          echo "Preparing client files for deployment"
-          cd "$tld/client"
+      echo "Preparing client files for deployment"
+      cd "$tld/client"
 
-          # watch output to see if any of the grunt tasks failed
-          exec grunt heroku | while read line; do
-            echo $line
-            if [[ $line =~ "Aborted due to warnings" ]]; then
-              exit 1
-            fi
-          done
+      # watch output to see if any of the grunt tasks failed
+      exec grunt heroku | while read line; do
+        echo $line
+        if [[ $line =~ "Aborted due to warnings" ]]; then
+          exit 1
+        fi
+      done
 
-          # if grunt failed then stop execution
-          if [[ $? -ne 0 ]]; then
-            exit 1
-          fi
+      # if grunt failed then stop execution
+      if [[ $? -ne 0 ]]; then
+        exit 1
+      fi
 
-          echo "Deploying to Heroku"
-          cd "$tld/_heroku"
-          (exec git add .)
-          (exec git add -u .)
-          (exec git commit)
-          (exec git push heroku master) 
-        break;;
-        Other ) 
-        exit;;
-    esac
+      echo "Deploying to Heroku"
+      cd "$tld/_heroku"
+      (exec git add .)
+      (exec git add -u .)
+      (exec git commit)
+      (exec git push heroku master) 
+    break;;
+    
+    Azure )
+      echo "Preparing server files for deployment"
+      cd "$tld/server"
+
+      # watch output to see if any of the grunt tasks failed
+      exec grunt azure | while read line; do
+        echo $line
+        if [[ $line =~ "Aborted due to warnings" ]]; then
+          exit 1
+        fi
+      done
+
+      # if grunt failed then stop execution
+      if [[ $? -ne 0 ]]; then
+        exit 1
+      fi
+
+      echo "Preparing client files for deployment"
+      cd "$tld/client"
+
+      # watch output to see if any of the grunt tasks failed
+      exec grunt azure | while read line; do
+        echo $line
+        if [[ $line =~ "Aborted due to warnings" ]]; then
+          exit 1
+        fi
+      done
+
+      # if grunt failed then stop execution
+      if [[ $? -ne 0 ]]; then
+        exit 1
+      fi
+
+      echo "Pushing to GIT and deploying to Azure"
+  
+    exit;;
+  esac
 done
