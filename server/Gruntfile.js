@@ -23,6 +23,13 @@ paths = {
     dirs: {
       server: '<%= paths.heroku.tld %>/server'
     }
+  },
+
+  azure: {
+    tld: path.normalize(__dirname + '../../_azure'),
+    dirs: {
+      server: '<%= paths.azure.tld %>/server'
+    }
   }
 };
 
@@ -77,23 +84,44 @@ module.exports = function (grunt) {
 
     copy: {
 
-      // Copy files from server -> heroku/server
+      // Copy files from server -> _heroku/server
       heroku: {
         files: [{
           expand: true,
           cwd: '<%= paths.server.tld %>',
           src: [
+            'config.js',
             'config/*.js',
-            'utils/*.js',
+            'gravatar/*.js',
             'middleware/*.js',
-            'server.js'
+            'routes/*.js',
+            'server.js',
+            'utils/*.js'
           ],
-          dest: '<%= paths.heroku.dirs.server %>'
+          dest: '<%= paths.heroku.dirs.server %>',
+        }]
+      },
+
+      // Copy files from server -> _azure/server
+      azure: {
+        files: [{
+          expand: true,
+          cwd: '<%= paths.server.tld %>',
+          src: [
+            'config.js',
+            'config/*.js',
+            'gravatar/*.js',
+            'middleware/*.js',
+            'routes/*.js',
+            'server.js',
+            'utils/*.js'
+          ],
+          dest: '<%= paths.azure.dirs.server %>',
         }]
       },
     },
 
-    // Automatically g browser
+    // Automatically open browser
     open: {
       all: {
         path: 'http://127.0.0.1:<%= express.options.port %>'
@@ -140,6 +168,12 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', []);
+
+  grunt.registerTask('azure', [
+    'newer:jshint:all',
+    'build',
+    'copy:azure'
+  ]);
 
   grunt.registerTask('heroku', [
     'newer:jshint:all',
