@@ -59,6 +59,13 @@ paths = {
     dirs: {
       client: '<%= paths.heroku.tld %>/client'
     }
+  },
+
+  azure: {
+    tld: path.normalize(__dirname + '../../_azure'),
+    dirs: {
+      client: '<%= paths.azure.tld %>/client'
+    }
   }
 };
 
@@ -196,6 +203,12 @@ module.exports = function (grunt) {
           src: '<%= paths.heroku.dirs.client %>'
         }]
       },
+      azure: {
+        files: [{
+          dot: true,
+          src: '<%= paths.azure.dirs.client %>'
+        }]
+      },
       ngtemplates: '<%= paths.compiled.tld %>/scripts/*.templates.js'
     },
 
@@ -281,7 +294,8 @@ module.exports = function (grunt) {
       options: {
         assetsDirs: [
           // List of directories to look for revved version of the assets referenced in the currently looked at file.
-          '<%= paths.dist.tld %>'
+          '<%= paths.dist.tld %>',
+          '<%= paths.dist.tld %>/images'
         ],
         patterns: {
           js: [[/(images\/\w+\.(png|jpg|jpeg|gif|webp|svg))/, 'Replacing reference to images in js files']]
@@ -346,8 +360,8 @@ module.exports = function (grunt) {
           cwd: '<%= paths.compiled.tld %>/concat/scripts',
           src: [
             // List of files that need to be made min-safe
-            // Should probably only be your app files
-            'app.concat.js'
+            'app.concat.js',
+            'app.vendor.js'
           ],
           dest: '<%= paths.compiled.tld %>/concat/scripts'
         }]
@@ -419,6 +433,18 @@ module.exports = function (grunt) {
             '!app/*'
           ],
           dest: '<%= paths.heroku.dirs.client %>'
+        }]
+      },
+
+      azure: {
+        files: [{
+          expand: true,
+          cwd: '<%= paths.dist.tld %>',
+          src: [
+            '**/*',
+            '!app/*'
+          ],
+          dest: '<%= paths.azure.dirs.client %>'
         }]
       }
     },
@@ -572,6 +598,12 @@ module.exports = function (grunt) {
     'newer:jshint',
     // 'test', // temporarily disabled until tests are made
     'build'
+  ]);
+
+  grunt.registerTask('azure', [
+    'dist',
+    'clean:azure',
+    'copy:azure'
   ]);
 
   grunt.registerTask('heroku', [
