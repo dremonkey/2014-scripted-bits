@@ -3,3 +3,6 @@
 
 # Heroku Dir
 _heroku/*
+
+# Azure Dir
+_azure/*
