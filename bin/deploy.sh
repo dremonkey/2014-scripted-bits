@@ -88,6 +88,11 @@ select env in "Heroku" "Azure"; do
       fi
 
       echo "Pushing to GIT and deploying to Azure"
+      cd "$tld/_azure"
+      (exec git add .)
+      (exec git add -u .)
+      (exec git commit)
+      (exec git push azure master)
   
     exit;;
   esac
