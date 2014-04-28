@@ -4,7 +4,7 @@ angular.module('particle.common.skrollr')
 
   // @TODO Make this a provider so skrollr options can be injected/configured
   // @TODO Make skrollr menu a provider option
-  .factory('skrollrd', function ($location) {
+  .factory('skrollrd', function () {
     var _instance, _destroyTimer, options;
 
     options = {
