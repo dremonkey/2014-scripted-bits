@@ -1,23 +1,27 @@
 'use strict';
 
-var config, express, http, init, log, middleware, routes;
-
 // Module dependencies
-config = require('./config/index.js');
-express = require('express');
-http = require('http');
-log = require('./utils/logger');
-middleware = require('./middleware');
-routes = require('./routes');
+var express = require('express');
+var http = require('http');
+var middleware = require('./middleware');
+var routes = require('./routes');
+
+var config = require('./config/index.js');
+var log = require('./utils/logger');
+
+var startServer = function (server, configObj) {
+  server.set('port', configObj.server.port);
+  return http.createServer(server).listen(server.get('port'), function () {
+    log.info('Express server listening on port ' + server.get('port'));
+  });
+};
 
 // Sets up the express server instance
 // Instantiates the routes, middleware, and starts the http server
-init = function (server) {
-
-  var _config;
+var init = function (server) {
 
   // Retrieve the configuration object
-  _config = config.get();
+  var configObj = config.get();
 
   // log requests to the console
   server.use(express.logger('dev'));
@@ -28,7 +32,7 @@ init = function (server) {
   server.use(express.methodOverride());
 
   // ## Middleware
-  middleware(server, _config);
+  middleware(server, configObj);
 
   // ## Initialize Routes
   routes.api(server);
@@ -42,15 +46,8 @@ init = function (server) {
   // Picks up any left over errors and returns a nicely formatted server 500 error
   server.use(express.errorHandler());
 
-  function startServer () {
-    server.set('port', _config.server.port);
-    http.createServer(server).listen(server.get('port'), function () {
-      log.info('Express server listening on port ' + server.get('port'));
-    });
-  }
-
   // Start the server
-  startServer();
+  startServer(server, configObj);
 };
 
 // Initializes the server

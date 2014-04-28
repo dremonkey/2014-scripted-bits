@@ -1,40 +1,40 @@
 'use strict';
 
-var _, isWhitelisted, log, mapUrl, path, querystring, request, util;
-
 // Module Dependencies
-_ = require('lodash');
-log = require('../../utils/logger');
-path = require('path');
-querystring = require('querystring');
-request = require('request');
-util = require('util');
+var _ = require('lodash');
+var path = require('path');
+var querystring = require('querystring');
+var request = require('request');
+var util = require('util');
+
+// var log = require('../../utils/logger');
 
 /**
  * Utility function to map a request to the Wordpress REST API endpoint
  */
-mapUrl = function (params, query) {
-  var _base, _path, _qs, _version, _siteID, endpoint;
+var mapUrl = function (params, query) {
+
+  var endpoint = '';
 
   // Build the base url
-  _version = 'v1';
-  _siteID = 62801866;
-  _base = util.format('https://public-api.wordpress.com/rest/%s/sites/%d/', _version, _siteID);
+  var version = 'v1';
+  var siteID = 62801866;
+  var base = util.format('https://public-api.wordpress.com/rest/%s/sites/%d/', version, siteID);
 
   // Build the endpoint
   if ('site' === params.resource) {
-    endpoint = _base;
+    endpoint = base;
   }
   else {
-    _qs = _.isEmpty(query) ? '' : '?' + querystring.stringify(query);
+    var qs = _.isEmpty(query) ? '' : '?' + querystring.stringify(query);
 
     // Determine if param.id is a post id or a post slug
     if (params.id) {
       params.id = params.id.match(/[0-9]+/) && params.id || 'slug:' + params.id;
     }
     
-    _path = path.normalize([params.resource, params.id, params.action].join('/'));
-    endpoint = _base + _path + _qs;
+    var wpPath = path.normalize([params.resource, params.id, params.action].join('/'));
+    endpoint = base + wpPath + qs;
   }
 
   return endpoint;
@@ -43,7 +43,7 @@ mapUrl = function (params, query) {
 /**
  * Utility function to see if a resource endpoint is good
  */
-isWhitelisted = function (resource) {
+var isWhitelisted = function (resource) {
   return ['site', 'posts', 'categories', 'tags'].indexOf(resource) !== -1;
 };
 
