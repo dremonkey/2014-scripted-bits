@@ -458,9 +458,8 @@ module.exports = function (grunt) {
         'compass:server'
       ],
       dist: [
-        // 'compass:dist',
         'imagemin',
-        'svgmin'
+        // 'svgmin'
       ]
     },
 
