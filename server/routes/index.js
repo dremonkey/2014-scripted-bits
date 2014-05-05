@@ -3,7 +3,7 @@
 var api;
 
 // Module Dependencies
-api = require('./api');
+api = require('./api.js');
 
 module.exports = {
   api: api

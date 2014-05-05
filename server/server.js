@@ -24,7 +24,8 @@ var init = function (server) {
   var configObj = config.get();
 
   // log requests to the console
-  server.use(express.logger('dev'));
+  // server.use(express.logger('dev'));
+  server.use(express.logger());
 
   // extract data from the body of the request
   server.use(express.bodyParser());
