@@ -82,6 +82,18 @@ module.exports = function (grunt) {
       }
     },
 
+    // clean: {
+    //   options: {
+    //     force: true // lets us delete stuff outside the current working directory
+    //   },
+    //   azure: {
+    //     files: [{
+    //       dot: true,
+    //       src: '<%= paths.azure.dirs.server %>'
+    //     }]
+    //   }
+    // },
+
     copy: {
 
       // Copy files from server -> _heroku/server
@@ -91,12 +103,12 @@ module.exports = function (grunt) {
           cwd: '<%= paths.server.tld %>',
           src: [
             'config.js',
-            'config/*.js',
-            'gravatar/*.js',
-            'middleware/*.js',
-            'routes/*.js',
+            'config/**/*.js',
+            'gravatar/**/*.js',
+            'middleware/**/*.js',
+            'routes/**/*.js',
             'server.js',
-            'utils/*.js'
+            'utils/**/*.js'
           ],
           dest: '<%= paths.heroku.dirs.server %>',
         }]
@@ -109,12 +121,12 @@ module.exports = function (grunt) {
           cwd: '<%= paths.server.tld %>',
           src: [
             'config.js',
-            'config/*.js',
-            'gravatar/*.js',
-            'middleware/*.js',
-            'routes/*.js',
+            'config/**/*.js',
+            'gravatar/**/*.js',
+            'middleware/**/*.js',
+            'routes/**/*.js',
             'server.js',
-            'utils/*.js'
+            'utils/**/*.js'
           ],
           dest: '<%= paths.azure.dirs.server %>',
         }]
@@ -152,7 +164,6 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run([
-        'build',
         'express:dist',
         'open'
       ]);
@@ -160,24 +171,19 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'newer:jshint:all',
-      'build',
       'express:dev',
       'open',
       'watch'
     ]);
   });
 
-  grunt.registerTask('build', []);
-
   grunt.registerTask('azure', [
     'newer:jshint:all',
-    'build',
     'copy:azure'
   ]);
 
   grunt.registerTask('heroku', [
     'newer:jshint:all',
-    'build',
     'copy:heroku'
   ]);
 };
