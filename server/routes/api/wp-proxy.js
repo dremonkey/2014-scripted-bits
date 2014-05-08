@@ -2,12 +2,9 @@
 
 // Module Dependencies
 var _ = require('lodash');
-var path = require('path');
 var querystring = require('querystring');
 var request = require('request');
 var util = require('util');
-
-// var log = require('../../utils/logger');
 
 /**
  * Utility function to map a request to the Wordpress REST API endpoint
@@ -33,7 +30,12 @@ var mapUrl = function (params, query) {
       params.id = params.id.match(/[0-9]+/) && params.id || 'slug:' + params.id;
     }
     
-    var wpPath = path.normalize([params.resource, params.id, params.action].join('/'));
+    // build wordpress endoint
+    var wpPath = _.reduce([params.resource, params.id, params.action], function (memo, val) {
+      if (val) memo += '/' + val;
+      return memo;
+    });
+  
     endpoint = base + wpPath + qs;
   }
 
