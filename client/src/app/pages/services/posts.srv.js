@@ -35,6 +35,19 @@ angular.module('particle.pages.services')
     // Internal Helpers
     // ----------------------------
 
+    // Removes excluded posts
+    // @NOTE This is done here because there is not way to exclude categories using the
+    // Wordpress REST API query parameters
+    function _excludeFromList (params, posts, excluded) {
+      posts = _.filter(posts, function (post) {
+        return !_.some(post.categories, function (cat) {
+          return excluded.indexOf(cat.slug) !== -1;
+        });
+      });
+
+      return posts;
+    }
+
     // @param params (obj) get posts query parameters
     // @param excluded (arr) Array of categories to exclude
     function _getSinglePost (params, excluded) {
@@ -44,10 +57,8 @@ angular.module('particle.pages.services')
       excluded = excluded || [];
 
       // callback function for _.some()
-      function _cb () {
-        return function (cat) {
-          return excluded.indexOf(cat.slug) !== -1;
-        };
+      function _cb (cat) {
+        return excluded.indexOf(cat.slug) !== -1;
       }
 
       Posts.getList(params).then(function (posts) {
@@ -57,7 +68,7 @@ angular.module('particle.pages.services')
         if(posts.found) {
           // return the first post that is not categorized as 'projects'
           for (var i = 0; i < posts.length; i++) {
-            if (_.some(posts[i].categories, _cb())) continue;
+            if (_.some(posts[i].categories, _cb)) continue;
             deferred.resolve(posts[i]);
             resolved = true;
             break;
@@ -112,16 +123,8 @@ angular.module('particle.pages.services')
 
       // Get the posts
       Posts.getList(merged).then(function (posts) {
-
-        // remove projects category posts if not explicitly requested...
-        // this is done here because there is not way to exclude categories using the
-        // Wordpress REST API query parameters
         if (!params.category) {
-          posts = _.filter(posts, function (post) {
-            return !_.some(post.categories, function (cat) {
-              return defaultExcluded.indexOf(cat.slug) !== -1;
-            });
-          });
+          posts = _excludeFromList(params, posts, defaultExcluded);
         }
 
         deferred.resolve(posts);
@@ -187,7 +190,7 @@ angular.module('particle.pages.services')
       return _getSinglePost(merged, excluded);
     };
 
-    this.first = function (params) {
+    this.first = function (params, excluded) {
       var defaults, merged, deferred;
 
       deferred = $q.defer();
@@ -200,14 +203,18 @@ angular.module('particle.pages.services')
 
       merged = utils.params(params, defaults);
 
+      // if we are retrieving a specific category, make sure it is not in the excluded list
+      excluded = _.without(defaultExcluded, merged.category);
+
       Posts.getList(merged).then(function (posts) {
+        posts = _excludeFromList(merged, posts, excluded);
         deferred.resolve(posts[0]);
       });
       
       return deferred.promise;
     };
 
-    this.last = function (params) {
+    this.last = function (params, excluded) {
       var defaults, merged, deferred;
 
       deferred = $q.defer();
@@ -219,7 +226,11 @@ angular.module('particle.pages.services')
 
       merged = utils.params(params, defaults);
 
+      // if we are retrieving a specific category, make sure it is not in the excluded list
+      excluded = _.without(defaultExcluded, merged.category);
+
       Posts.getList(merged).then(function (posts) {
+        posts = _excludeFromList(merged, posts, excluded);
         deferred.resolve(posts[0]);
       });
 

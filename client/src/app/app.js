@@ -15,7 +15,7 @@ angular.module('particle')
     // enable the HTML5 push/pop history API
     // if enabled make sure the on the server side everything is pushed to the index page
     // otherwise deep linking will not work properly
-    // $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
   })
 
   .run(function ($rootScope, $state, $stateParams) {

@@ -13,33 +13,33 @@ angular.module('particle.pages', [
 ]);
 
 angular.module('particle.pages')
-  .config(function ($stateProvider, $httpProvider, RestangularProvider) {
+  .config(function ($stateProvider, $httpProvider, $urlRouterProvider, RestangularProvider) {
 
-    // $urlRouterProvider
-    //   .rule(function ($injector, $location) {
-    //     var path, params, search;
+    $urlRouterProvider
+      .rule(function ($injector, $location) {
+        var path, params, search;
 
-    //     path = $location.path();
-    //     search = $location.search(); // Note: misnomer. This returns a query object, not a search string
+        path = $location.path();
+        search = $location.search(); // Note: misnomer. This returns a query object, not a search string
 
-    //     // check to see if the path already ends in '/'
-    //     if (path[path.length - 1] === '/') {
-    //       return;
-    //     }
+        // check to see if the path already ends in '/'
+        if (path[path.length - 1] === '/') {
+          return;
+        }
 
-    //     // If there was no search string / query params, return with a `/`
-    //     if (Object.keys(search).length === 0) {
-    //       return path + '/';
-    //     }
+        // If there was no search string / query params, return with a `/`
+        if (Object.keys(search).length === 0) {
+          return path + '/';
+        }
 
-    //     // Otherwise build the search string and return a `/?` prefix
-    //     params = [];
-    //     angular.forEach(search, function(v, k){
-    //       params.push(k + '=' + v);
-    //     });
+        // Otherwise build the search string and return a `/?` prefix
+        params = [];
+        angular.forEach(search, function(v, k){
+          params.push(k + '=' + v);
+        });
 
-    //     return path + '/?' + params.join('&');
-    //   });
+        return path + '/?' + params.join('&');
+      });
     
     $stateProvider
       .state('home', {
@@ -79,7 +79,7 @@ angular.module('particle.pages')
       })
 
       .state('posts.all.list', {
-        url: '',
+        url: '/',
         templateUrl: 'pages/templates/posts.list.tpl.html',
         controller: 'PostListCtrl',
         // resolve: {
@@ -90,7 +90,7 @@ angular.module('particle.pages')
       })
 
       .state('posts.all.page', {
-        url: '/page/{page:[0-9]+}',
+        url: '/page/{page:[0-9]+}/',
         templateUrl: 'pages/templates/posts.list.tpl.html',
         controller: 'PostListCtrl',
         // resolve: {
@@ -102,7 +102,7 @@ angular.module('particle.pages')
 
       .state('posts.filtered', {
         abstract: true,
-        url: '/{filterBy:topic|tag}/{slug:[A-Za-z0-9-]+}',
+        url: '/{filterBy:topic|tag}/{slug:[A-Za-z0-9-]+}/',
         templateUrl: 'pages/templates/posts.tpl.html',
         controller: 'PostsCtrl',
       })
@@ -114,14 +114,14 @@ angular.module('particle.pages')
       })
 
       .state('posts.filtered.page', {
-        url: '/page/{page:[0-9]+}',
+        url: '/page/{page:[0-9]+}/',
         templateUrl: 'pages/templates/posts.list.tpl.html',
         controller: 'PostListCtrl'
       })
 
       // Post Pages
       .state('post', {
-        url: '/posts/{slug:[A-Za-z0-9-]+}',
+        url: '/posts/{slug:[A-Za-z0-9-]+}/',
         templateUrl: 'pages/templates/post.tpl.html',
         controller: 'PostCtrl',
         data: {
@@ -130,7 +130,7 @@ angular.module('particle.pages')
       })
 
       .state('project', {
-        url: '/projects/{slug:[A-Za-z0-9-]+}',
+        url: '/projects/{slug:[A-Za-z0-9-]+}/',
         templateUrl: 'pages/templates/project.tpl.html',
         controller: 'ProjectCtrl',
         data: {

@@ -31,7 +31,6 @@ angular.module('particle.pages.controllers')
       };
 
       $projects.list(params).then(function (projects) {
-        console.log(projects);
         $scope.projects = projects;
       });
     };

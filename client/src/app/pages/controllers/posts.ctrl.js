@@ -5,7 +5,7 @@ angular.module('particle.pages.controllers')
   .controller('PostsCtrl', function ($rootScope, $scope, $state, $stateParams, $bloginfo, $tags, $topics) {
     var filterBy, slug;
 
-    console.log('>>>> PostsCtrl');
+    // console.log('>>>> PostsCtrl');
 
     slug = $state.params.slug || '';
     filterBy = $state.params.filterBy || '';
@@ -32,7 +32,7 @@ angular.module('particle.pages.controllers')
     }
 
     $scope.$on('$pageChangeStart', function (event, newpage, oldpage) {
-      console.log('newpage', newpage, 'oldpage', oldpage);
+      // console.log('newpage', newpage, 'oldpage', oldpage);
       $scope.animateClass = newpage > oldpage ? 'slide-left' : 'slide-right';
     });
     
@@ -49,7 +49,7 @@ angular.module('particle.pages.controllers')
     this.getPosts = function (page) {
       var params;
 
-      console.log('>>>> PostListCtrl.getPosts');
+      // console.log('>>>> PostListCtrl.getPosts');
 
       params = $stateParams;
       params.page = page || $scope.currentPage;
@@ -71,8 +71,7 @@ angular.module('particle.pages.controllers')
   .controller('PostListPaginationCtrl', function ($state, $stateParams, $rootScope, $scope) {
     var goToPage;
 
-    console.log('>>>> PostListPaginationCtrl');
-    console.log('$stateParams', $stateParams);
+    // console.log('>>>> PostListPaginationCtrl');
     
     // Callback function to execute when a new page is clicked
     goToPage = function (page) {
@@ -99,7 +98,7 @@ angular.module('particle.pages.controllers')
         stateName = $state.current.name;
       }
       
-      console.log('goto state', stateName, params);
+      // console.log('goto state', stateName, params);
 
       // Update scope with new page
       $scope.currentPage = page;
@@ -120,7 +119,7 @@ angular.module('particle.pages.controllers')
     $scope.goToPage = goToPage;
     $scope.currentPage = $stateParams.page || 1;
 
-     // totalItems needs to be very large number initially in order to prevent pagination from
+    // totalItems needs to be very large number initially in order to prevent pagination from
     // prematurely firing the goToPage() function. Because posts is loaded asynchronously, scope.totalItems
     // is not known until after the directive is rendered.
     //

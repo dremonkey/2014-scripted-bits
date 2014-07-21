@@ -70,7 +70,7 @@ angular.module('particle.pages.directives')
 
       $element = angular.element(element);
       className = $element.scope().animateClass;
-      speed = parseInt($element.attr('anim-speed')) || 1000;
+      speed = parseInt($element.attr('anim-speed'), 10) || 1000;
 
       $element.addClass(className);
 

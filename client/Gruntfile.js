@@ -193,7 +193,8 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '<%= paths.compiled.tld %>/*',
-            '<%= paths.dist.tld %>/*'
+            '<%= paths.dist.tld %>/*',
+            // '!<%= paths.dist.tld %>/images', // don't clean images
           ]
         }]
       },
@@ -458,7 +459,7 @@ module.exports = function (grunt) {
         'compass:server'
       ],
       dist: [
-        'imagemin',
+        'newer:imagemin',
         // 'svgmin'
       ]
     },

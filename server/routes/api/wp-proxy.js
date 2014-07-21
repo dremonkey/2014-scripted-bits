@@ -35,7 +35,7 @@ var mapUrl = function (params, query) {
       if (val) memo += '/' + val;
       return memo;
     });
-  
+    
     endpoint = base + wpPath + qs;
   }
 

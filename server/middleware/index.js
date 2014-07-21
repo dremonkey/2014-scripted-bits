@@ -47,9 +47,10 @@ middleware = function (server, config) {
   // Set the directory(s) to serve static files from
   if (config.dirs.static) {
     var staticDirs, maxAge;
+
     staticDirs = [].concat(config.dirs.static);
-    // maxAge = 30 * 24 * 60 * 60 * 1000; // 30 day cache control in milliseconds 
-    maxAge = 0;
+    maxAge = 30 * 24 * 60 * 60 * 1000; // 30 day cache control in milliseconds
+    
     for (var i = staticDirs.length - 1; i >= 0; i--) {
       server.use(express.static(staticDirs[i], {maxAge: maxAge}));
     }

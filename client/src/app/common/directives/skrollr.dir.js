@@ -12,7 +12,7 @@ angular.module('particle.common.skrollr')
     def = {
       link: function (scope, element) {
   
-        console.log('>>>> init skrollr directive');
+        // console.log('>>>> init skrollr directive');
 
         // Initialize this element
         skrollrd.refresh(element[0]);
@@ -24,13 +24,13 @@ angular.module('particle.common.skrollr')
           return top;
         }, function (newTop, oldTop) {
           if (newTop === oldTop) return;
-          console.log('newTop', newTop);
+          // console.log('newTop', newTop);
           skrollrd.refresh(element[0]);
         });
 
         // Do Cleanup
         scope.$on('$destroy', function () {
-          console.log('$destroy', 'skrollr-directive');
+          // console.log('$destroy', 'skrollr-directive');
           skrollrd.destroy();
         });
       }
@@ -78,7 +78,7 @@ angular.module('particle.common.skrollr')
           // refresh skrollr... 
           // use timeout to make sure refresh is called after the last layoutComplete broadcast
           timer = $timeout(function () {
-            console.log('>>>> skrollr masonry directive refresh');
+            // console.log('>>>> skrollr masonry directive refresh');
             element.removeClass('invisible');
             skrollrd.refresh(element[0]);
           }, 600);
@@ -87,7 +87,7 @@ angular.module('particle.common.skrollr')
 
         // Do Cleanup
         scope.$on('$destroy', function () {
-          console.log('$destroy', 'skrollr-masonry');
+          // console.log('$destroy', 'skrollr-masonry');
           skrollrd.destroy();
         });
       }
